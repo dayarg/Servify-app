@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'servify-app-react/build')
+            os.path.join(BASE_DIR, 'react-servify/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'servify-app-react/build/static')
+    os.path.join(BASE_DIR, 'react-servify/build/static')
 ]
 
 # Default primary key field type
