@@ -1,13 +1,28 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+  .scroll-bar {
+    scrollbar-color: theme(colors.mid-grey) theme(colors.light-grey);
+    scrollbar-width: thin !important;
+  }
+
+  .scroll-bar::-webkit-scrollbar {
+    @apply w-2; /* width of the entire scrollbar */
+  }
+
+  .scroll-bar::-webkit-scrollbar-track-piece {
+    @apply bg-light-grey; /* Background area color*/
+    @apply rounded-full; /* Tracking area color*/
+  }
+
+  .scroll-bar::-webkit-scrollbar-thumb {
+    @apply bg-mid-grey; /* Scroll thumb color */
+    @apply rounded-full; /* Scroll thumb roundness */
+  }
+
+  .rounded-container {
+    @apply w-full border-light-grey rounded-lg;
+  }
 }
