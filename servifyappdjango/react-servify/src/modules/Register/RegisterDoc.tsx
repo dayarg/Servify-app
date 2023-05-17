@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
 import Carpintero from "../../assets/img/carpintero-banner.jpg";
-import DateInput from "../../components/DateInput/DateInput";
 import Uploader from "../../components/Uploader/Uploader";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";

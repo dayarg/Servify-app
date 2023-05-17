@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import useBreakpoint from "../../hooks/useBreakpoint";
 import Input from "../../components/Input/Input";
 import Electricista from "../../assets/img/electricista-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
-import DrawerHome from "../../components/Drawer/DrawerHome";
-import DrawerMobile from "../../components/Drawer/DrawerMobile";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
 
 const Register = () => {
   const navigate = useNavigate();
-  const breakPoint = useBreakpoint();
 
   const handleClick = () => {
     navigate("/register-2");
