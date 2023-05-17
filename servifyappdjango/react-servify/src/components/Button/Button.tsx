@@ -69,7 +69,7 @@ const Button = ({
         themeClasses,
         `
           box-border 
-          h-[54px]
+          h-11
           rounded-2xl
           text-body-s font-bold 
           flex items-center justify-center 
