@@ -20,7 +20,7 @@ function DropdownMenu({ id, label, options }: DropdownMenuProps): JSX.Element {
       <button
         onClick={() => setIsOpen(!isOpen)}
         type="button"
-        className="inline-flex justify-center items-center w-full px-4 py-2 bg-transparent text-sm font-medium text-primary"
+        className="inline-flex justify-center items-center w-full px-4 py-2 bg-transparent text-sm font-medium text-primary hover:text-secondary"
         id="options-menu"
         aria-haspopup="true"
         aria-expanded={isOpen}

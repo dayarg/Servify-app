@@ -17,6 +17,7 @@ const ProfessionalCard = ({
         <Avatar
           name={nombre}
           size="w-20 h-20"
+          textSize="text-h1"
         />
       <div className="flex-1 ml-4">
         <h2 className="text-xl font-bold mb-1">{nombre}</h2>

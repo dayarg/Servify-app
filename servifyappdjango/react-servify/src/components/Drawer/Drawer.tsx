@@ -5,12 +5,16 @@ import {
   faTimes,
   faQuestionCircle,
   faEnvelope,
-  faUserCircle,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import Logo from '../../assets/img/logo.png';
+import Avatar from "../Avatar/Avatar";
 
+export type DrawerProps = {
+  userName: string;
+};
 
-const Drawer = () => {
+const Drawer = ({ userName }: DrawerProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
 
@@ -23,21 +27,17 @@ const Drawer = () => {
   };
 
   return (
-    <div className="relative h-screen">
-      <div className="flex items-center justify-between py-4 px-6 bg-gray-900">
+    <div className="relative w-full h-12">
+      <div className="flex items-center justify-between py-4 px-6 bg-white">
         <div className="flex items-center">
-          <img src={""} alt="Logo" className="w-10 h-10" />
-          <h1 className="text-white ml-2 font-bold">My App</h1>
+          <img src={Logo} alt="Logo" className="w-28 h-14" />
         </div>
         <div className="relative">
           <button
             onClick={toggleAvatarMenu}
-            className="p-1 border-2 border-white rounded-full"
+            className="p-1 border-2 border-primary rounded-full"
           >
-            <FontAwesomeIcon
-              icon={faUserCircle}
-              className="text-white text-2xl"
-            />
+            <Avatar name={userName} size="w-10 h-10" textSize="text-lg" />
           </button>
           {isAvatarOpen && (
             <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
@@ -48,21 +48,21 @@ const Drawer = () => {
                 aria-labelledby="options-menu"
               >
                 <button
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                  className="block px-4 py-2 text-sm text-primary hover:bg-secondary hover:text-white w-full text-left"
                   role="menuitem"
                 >
                   <FontAwesomeIcon icon={faQuestionCircle} className="mr-2" />
                   Ayuda
                 </button>
                 <button
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                  className="block px-4 py-2 text-sm text-primary hover:bg-secondary hover:text-white w-full text-left"
                   role="menuitem"
                 >
                   <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
                   PQR
                 </button>
                 <button
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                  className="block px-4 py-2 text-sm text-primary hover:bg-secondary hover:text-white w-full text-left"
                   role="menuitem"
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
