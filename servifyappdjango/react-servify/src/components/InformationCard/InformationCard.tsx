@@ -19,6 +19,7 @@ const InformationCard = ({
         <Avatar
           name={"Sandra Ayala"}
           size="w-20 h-20"
+          textSize="text-h1"
         />
       <div className="flex-1 ml-4">
         <h2 className="text-xl font-bold mb-2">{nombre}</h2>
