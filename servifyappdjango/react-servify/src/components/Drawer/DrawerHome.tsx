@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { homeServices } from "./models";
 
-const DrawerHome = (): JSX.Element => {
+export type DrawerHomeProps = {
+  careers: 'supplier' | 'client';
+}
+
+const DrawerHome = ({careers}: DrawerHomeProps): JSX.Element => {
   const navigate = useNavigate();
   const handleClickLogIn = () => {
     navigate("/login");
   };
   const handleClickJob = () => {
-    navigate("/login");
+    careers === 'client' ? navigate("/home-supplier") : careers === 'supplier' && navigate("/");
   };
   return (
     <div className="relative w-full h-12">
@@ -30,7 +34,7 @@ const DrawerHome = (): JSX.Element => {
             className="inline-flex whitespace-nowrap justify-center items-center w-full px-4 py-2 bg-transparent text-sm font-medium text-primary hover:text-secondary"
             id="job"
           >
-            Trabaja con nosotros
+            {careers === 'supplier' ? 'Solicita un servicio' : careers === 'client' && 'Trabaja con nosotros'}
           </button>
           <button
             onClick={handleClickJob}
