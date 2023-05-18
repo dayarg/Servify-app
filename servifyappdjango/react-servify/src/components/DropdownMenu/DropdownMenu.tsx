@@ -39,7 +39,7 @@ function DropdownMenu({ id, label, options }: DropdownMenuProps): JSX.Element {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <div className="py-1 bg-secondary rounded-md text-white" role="none">
+          <div className="py-1 bg-white shadow-md border border-light-grey rounded-md text-secondary font-medium" role="none">
             {options.map((option, index) => (
               <a
                 key={option.link}
