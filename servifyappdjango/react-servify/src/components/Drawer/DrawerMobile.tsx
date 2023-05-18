@@ -7,7 +7,11 @@ import { homeServices } from "./models";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
-const DrawerMobile = (): JSX.Element => {
+export type DrawerMobileProps = {
+  careers: 'supplier' | 'client';
+}
+
+const DrawerMobile = ({careers}: DrawerMobileProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +29,7 @@ const DrawerMobile = (): JSX.Element => {
   };
 
   const handleWorkClick = () => {
-    navigate("/login");
+    careers === 'client' ? navigate("/home-supplier") : careers === 'supplier' && navigate("/");
     setIsOpen(false);
   };
 
@@ -66,21 +70,21 @@ const DrawerMobile = (): JSX.Element => {
             <div className="mb-6 text-primary">
               <button
                 type="button"
-                className="block w-full text-center py-4 hover:text-secondary"
+                className="block w-full text-center py-4 text-sm font-medium hover:text-secondary"
                 onClick={handleHelpClick}
               >
                 Ayuda
               </button>
               <button
                 type="button"
-                className="block w-full text-center py-4 hover:text-secondary"
+                className="block w-full text-center py-4 text-sm font-medium hover:text-secondary"
                 onClick={handleWorkClick}
               >
-                Trabaja con nosotros
+                {careers === 'supplier' ? 'Solicita un servicio' : careers === 'client' && 'Trabaja con nosotros'}
               </button>
               <button
                 type="button"
-                className="block w-full text-center py-4 hover:text-secondary"
+                className="block w-full text-center py-4 text-sm font-medium hover:text-secondary"
                 onClick={handleContactClick}
               >
                 Contacto
