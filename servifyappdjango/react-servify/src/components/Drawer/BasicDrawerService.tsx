@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-const BasicDrawer = (): JSX.Element => {
+export type BasicDrawerServiceProps = {
+    label: string;
+}
+
+const BasicDrawerService = ({label}: BasicDrawerServiceProps): JSX.Element => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(-1);
+    navigate('/start-page');
   };
   return (
     <div className="relative w-full h-12">
@@ -14,6 +18,7 @@ const BasicDrawer = (): JSX.Element => {
         <button onClick={handleClick}>
             <FontAwesomeIcon icon={faChevronLeft} />
         </button>
+        <h1 className="text-body-m md:text-h1 font-bold mx-auto">{label}</h1>
         <div className="flex items-center">
           <img src={Logo} alt="Logo" className="w-28 h-14 min-w-28 min-h-14" />
         </div>
@@ -21,4 +26,4 @@ const BasicDrawer = (): JSX.Element => {
     </div>
   );
 };
-export default BasicDrawer;
+export default BasicDrawerService;

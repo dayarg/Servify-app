@@ -26,3 +26,31 @@
     @apply w-full border-light-grey rounded-lg;
   }
 }
+
+/* Estilos para navegadores WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Estilos para navegadores Firefox */
+scrollbar-width: thin;
+scrollbar-color: #888 #f1f1f1;
+
+.w-full {
+  max-height: 200px;
+  overflow: auto;
+  margin-right: 10px; /* Ajusta el valor según tus necesidades */
+}
