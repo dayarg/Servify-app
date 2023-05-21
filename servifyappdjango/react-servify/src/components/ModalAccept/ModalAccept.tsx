@@ -2,11 +2,15 @@ import React from "react";
 import Button from "../Button/Button";
 
 export type ModalAcceptProps = {
+  title: string;
+  label: string;
+  btnAccept: string;
+  btnCancel: string;
   isOpen: boolean;
   onClose: () => void;
 };
 
-const ModalAccept = ({ isOpen, onClose }: ModalAcceptProps) => {
+const ModalAccept = ({ title, label, btnAccept, btnCancel, isOpen, onClose }: ModalAcceptProps) => {
   if (!isOpen) return null;
 
   return (
@@ -36,12 +40,11 @@ const ModalAccept = ({ isOpen, onClose }: ModalAcceptProps) => {
                   className="text-h5 leading-6 font-medium text-primary"
                   id="modal-headline"
                 >
-                  ¿Quieres aceptar el servicio?
+                  {title}
                 </h3>
                 <div className="mt-2">
                   <p className="text-lg text-primary">
-                    Recuerda que entre más servicios aceptes, mejores
-                    oportunidades tendrás de mejorar tus ganancias.
+                    {label}
                   </p>
                 </div>
               </div>
@@ -55,10 +58,10 @@ const ModalAccept = ({ isOpen, onClose }: ModalAcceptProps) => {
                 theme="primary"
                 type="submit"
               >
-                Aceptar
+                {btnAccept}
               </Button>
               <Button id={"btnDiscard"} onClick={onClose} theme="secondary">
-                Rechazar
+                {btnCancel}
               </Button>
             </div>
           </div>

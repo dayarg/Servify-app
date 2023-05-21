@@ -9,4 +9,5 @@ export const homeServices = [
   { label: "Tutorías", link: "/tutorias" },
   { label: "Mecánico", link: "/mecanico" },
   { label: "Mascotas", link: "/mascotas" },
+  { label: "Maquillaje", link: "/maquillaje" },
 ];

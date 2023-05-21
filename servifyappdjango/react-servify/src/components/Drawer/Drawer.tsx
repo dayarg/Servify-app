@@ -32,7 +32,17 @@ const Drawer = ({ userName }: DrawerProps): JSX.Element => {
         <div className="flex items-center">
           <img src={Logo} alt="Logo" className="w-28 h-14" />
         </div>
-        <div className="relative">
+        <div className="flex justify-between items-center">
+          <button
+            onClick={toggleMenu}
+            className="p-1 border-2 border-white rounded-md lg:hidden"
+          >
+            {isOpen ? (
+              <FontAwesomeIcon icon={faTimes} className="text-white text-2xl" />
+            ) : (
+              <FontAwesomeIcon icon={faBars} className="text-white text-2xl" />
+            )}
+          </button>
           <button
             onClick={toggleAvatarMenu}
             className="p-1 border-2 border-primary rounded-full"
@@ -40,7 +50,7 @@ const Drawer = ({ userName }: DrawerProps): JSX.Element => {
             <Avatar name={userName} size="w-10 h-10" textSize="text-lg" />
           </button>
           {isAvatarOpen && (
-            <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <div className="absolute right-6 z-30 mt-48 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
               <div
                 className="py-1"
                 role="menu"
@@ -72,16 +82,6 @@ const Drawer = ({ userName }: DrawerProps): JSX.Element => {
             </div>
           )}
         </div>
-        <button
-          onClick={toggleMenu}
-          className="p-1 border-2 border-white rounded-md lg:hidden"
-        >
-          {isOpen ? (
-            <FontAwesomeIcon icon={faTimes} className="text-white text-2xl" />
-          ) : (
-            <FontAwesomeIcon icon={faBars} className="text-white text-2xl" />
-          )}
-        </button>
       </div>
       {isOpen && (
         <div className="absolute inset-y-0 left-0 w-64 bg-gray-800 py-4 px-6">
