@@ -1,12 +1,13 @@
 # from django.shortcuts import render
 from rest_framework import viewsets
+from django.contrib.auth import authenticate, login
+from django.http.response import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from .serializer import registeruser
 from .models import register
 from .models import usernew
 from django.views import View
-from django.http.response import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 import json
 # Create your views here.
 
@@ -71,3 +72,23 @@ class userview(View):
         else:
             datos = {'message': 'User not found ...'}
         return JsonResponse(datos)
+
+
+class loginuser(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        try:
+            user = usernew.objects.get(Nombre=username)
+            if user.password == password:
+                login(request, user)
+                return JsonResponse({'message': 'Login successful'})
+            else:
+                return JsonResponse({'error': 'Invalid username or password'}, status=400)
+        except usernew.DoesNotExist:
+            return JsonResponse({'error': 'Invalid username or password'}, status=400)
