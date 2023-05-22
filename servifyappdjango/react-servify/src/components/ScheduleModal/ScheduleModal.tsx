@@ -8,9 +8,10 @@ import Textarea from "../Textarea/Textarea";
 export type ScheduleModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  disabled?: boolean;
 };
 
-const ScheduleModal = ({ isOpen, onClose }: ScheduleModalProps) => {
+const ScheduleModal = ({ isOpen, onClose, disabled }: ScheduleModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -87,6 +88,7 @@ const ScheduleModal = ({ isOpen, onClose }: ScheduleModalProps) => {
                 onClick={onClose}
                 theme="primary"
                 type="submit"
+                disabled={disabled}
               >
                 Agendar
               </Button>

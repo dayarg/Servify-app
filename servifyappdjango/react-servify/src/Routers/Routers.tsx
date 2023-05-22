@@ -6,6 +6,9 @@ import Register from '../modules/Register/Register';
 import RegisterDoc from '../modules/Register/RegisterDoc';
 import SupplierHome from '../modules/Home/SupplierHome';
 import RegisterClient from '../modules/Register/RegisterClient';
+import ServiceDetail from '../modules/ServiceDetail/ServiceDetail';
+import ProveedorPage from '../modules/ProveedorPage/ProveedorPage';
+import Administrator from '../modules/Administrator/Administrator';
 
 const Routers = () => {
   return (
@@ -18,6 +21,9 @@ const Routers = () => {
       <Route path="/register-client" Component={RegisterClient} />
       <Route path="/register-2" Component={RegisterDoc} />
       <Route path="/start-page" Component={StartPage} />
+      <Route path="/servicio/:servicePath" Component={ServiceDetail} />
+      <Route path="/proveedor-page" Component={ProveedorPage} />
+      <Route path="/administrator" Component={Administrator} />
     </Routes>
     </BrowserRouter>
   );
