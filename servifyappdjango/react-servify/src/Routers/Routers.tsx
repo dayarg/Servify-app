@@ -9,6 +9,7 @@ import RegisterClient from '../modules/Register/RegisterClient';
 import ServiceDetail from '../modules/ServiceDetail/ServiceDetail';
 import ProveedorPage from '../modules/ProveedorPage/ProveedorPage';
 import Administrator from '../modules/Administrator/Administrator';
+import LogInClient from '../modules/LogIn/LogInClient';
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="/" Component={Home} />
       <Route path="/home-supplier" Component={SupplierHome} />
       <Route path="/login" Component={LogIn} />
+      <Route path="/login-client" Component={LogInClient} />
       <Route path="/register" Component={Register} />
       <Route path="/register-client" Component={RegisterClient} />
       <Route path="/register-2" Component={RegisterDoc} />

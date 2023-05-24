@@ -6,26 +6,31 @@ import Mecanico from "../../assets/img/mecanico-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
 import Checkbox from "../../components/Checkbox/Checkbox";
+import moment from 'moment';
 
 interface RegisterClientProps {
-  Nombre: string;
-  Apellido: string;
-  Correo: string;
-  Id_user: string;
-  telefono: string;
-  password: string;
+  identificacion: string;
+  Nombre:string;
+  Apellido:string;
+  Fecha_de_nacimiento:string;
+  Ciudad_de_residencia:string;
+  Correo_electronico:string;
+  telefono:string;
+  password:string;
 }
 
 const RegisterClient = () => {
 
-  const [user, setUser] = useState({});
+
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState<RegisterClientProps>({
+    identificacion: "",
     Nombre: "",
     Apellido: "",
-    Correo: "",
-    Id_user: "",
+    Fecha_de_nacimiento:"",
+    Ciudad_de_residencia:"",
+    Correo_electronico:"",
     telefono: "",
     password: "",
   });
@@ -54,6 +59,7 @@ const RegisterClient = () => {
       [name]: value,
     }));
   };
+
   const terms =
     "He leído y acepto los términos y condiciones de la política de privacidad de Pospet";
 
@@ -89,8 +95,8 @@ const RegisterClient = () => {
                 label={"Correo electrónico"}
                 type={"email"}
                 placeholder={"Ingresa tu correo electrónico"}
-                value={formData.Correo || ""}
-                onChange={(value) => handleChange("Correo", value)}
+                value={formData.Correo_electronico || ""}
+                onChange={(value) => handleChange("Correo_electronico", value)}
               />
             </div>
             <div className="mb-6">
@@ -98,8 +104,8 @@ const RegisterClient = () => {
                 label={"Identificacion"}
                 type={"text"}
                 placeholder={"Ingresa tu identificación"}
-                value={formData.Id_user || ""}
-                onChange={(value) => handleChange("Id_user", value)}
+                value={formData.identificacion || ""}
+                onChange={(value) => handleChange("identificacion", value)}
               />
             </div>
             <div className="mb-6">
@@ -116,12 +122,16 @@ const RegisterClient = () => {
                 label={"Ciudad de residencia"}
                 type={"text"}
                 placeholder={"Ingresa tu ciudad de residencia"}
+                value={formData.Ciudad_de_residencia || ""}
+                onChange={(value) => handleChange("Ciudad_de_residencia", value)}
               />
             </div>
             <div className="mb-6">
               <DateInput
                 label="Fecha de nacimiento"
                 placeholder="Ingresa tu fecha de nacimiento"
+                value={formData.Fecha_de_nacimiento || ""}
+                onChange={(value) => handleChange("Fecha_de_nacimiento", value)}
               />
             </div>
             <div className="mb-6">

@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
-import Plomero from "../../assets/img/plomero-banner.jpg";
+import Mudanza from "../../assets/img/mudanza-banner.jpg";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
-import { useState } from "react";
 
 
-const LogIn = () => {
+const LogInClient = () => {
   const navigate = useNavigate();
 
 
@@ -51,7 +50,7 @@ const LogIn = () => {
             </div>
             <div className="mt-10 mx-auto text-center">
               <span className="text-primary">¿No tienes una cuenta? </span>
-              <a href={"/register"} className="text-secondary">
+              <a href={"/register-client"} className="text-secondary">
                 Registrate
               </a>
             </div>
@@ -59,7 +58,7 @@ const LogIn = () => {
         </div>
         <div className="hidden mt-6 md:w-1/2 md:block" >
           <img
-            src={Plomero}
+            src={Mudanza}
             alt="plomero banner"
             className="w-screen h-screen float-right"
           />
@@ -69,4 +68,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default LogInClient;
