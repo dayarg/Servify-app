@@ -11,7 +11,7 @@ export type DrawerHomeProps = {
 const DrawerHome = ({careers}: DrawerHomeProps): JSX.Element => {
   const navigate = useNavigate();
   const handleClickLogIn = () => {
-    navigate("/login");
+    careers === 'supplier' ? navigate("/login"): careers === 'client' && navigate("/login-client");
   };
   const handleClickJob = () => {
     careers === 'client' ? navigate("/home-supplier") : careers === 'supplier' && navigate("/");

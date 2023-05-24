@@ -6,17 +6,18 @@ export type InputProps = {
   label: string;
   type: "text" | "email" | "phone" | "password";
   placeholder: string;
+  value?: string;
   onChange?: (value: string) => void;
 };
 
-const Input = ({ label, type, placeholder, onChange }: InputProps): JSX.Element => {
-  const [value, setValue] = useState("");
+const Input = ({ label, type, placeholder,value, onChange }: InputProps): JSX.Element => {
+  const [value2, setValue2] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-    setValue(inputValue);
+    setValue2(inputValue);
 
     // Validaciones
     switch (type) {

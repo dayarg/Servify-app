@@ -1,11 +1,19 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, useState } from "react";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface DateInputProps{
   label: string;
   placeholder: string;
+  value? : string; 
+  onChange?: (value: string) => void;
 }
 
-const DateInput = ({ label, placeholder, ...props }: Props) => {
+const DateInput = ({ label, placeholder,onChange,value, ...props }: DateInputProps): JSX.Element => {
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChange && onChange(inputValue);
+  };
   return (
     <div className="flex flex-col">
       <label className="text-primary mb-1 font-bold">{label}</label>
@@ -14,9 +22,13 @@ const DateInput = ({ label, placeholder, ...props }: Props) => {
         type="date"
         placeholder={placeholder}
         {...props}
+        onChange={handleOnChange}
+        value = {value}
       />
     </div>
   );
 };
 
 export default DateInput;
+
+
