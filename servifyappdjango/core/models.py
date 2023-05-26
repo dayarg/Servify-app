@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+import os
 
 
 # Create your models here.
@@ -42,7 +43,7 @@ class empleados(models.Model):
     apellido_empl = models.CharField(max_length=30, verbose_name='apellido')
     identificacion_empl = models.CharField(max_length=15, verbose_name='identificacion')
     rol = models.ForeignKey(dept_rol,on_delete=models.CASCADE)
-    correo_electronico = models.EmailField(verbose_name= 'correo')
+    correo_electronico = models.CharField(max_length=50,verbose_name= 'correo')
     telefono = models.CharField(max_length=10, verbose_name='telefono')
     direccion = models.CharField(max_length=200,verbose_name='Direccion residencia')
     fecha_nacimiento = models.DateField(verbose_name='fecha nacimiento')
@@ -70,26 +71,38 @@ class usuarios(AbstractBaseUser):
         super().save(*args, **kwargs)
 
     
-class proveedores(models.Model):
-    id_proveedores = models.AutoField(primary_key=True)
+class proveedores(AbstractBaseUser):
+    id = models.AutoField(primary_key=True)
     nombre_pro     = models.CharField(max_length=30, verbose_name ='nombre')
     apellido_pro   = models.CharField(max_length=30, verbose_name ='apellido')
     identificacion = models.CharField(max_length=15,verbose_name ='identificacion')
-    fecha_nacimiento  = models.DateField(verbose_name ='fecha nacimiento')
+    fecha_nacimiento  = models.CharField(max_length=10,verbose_name ='fecha nacimiento')
     profesion         = models.CharField(max_length=50, verbose_name='profesion')
-    correo   = models.EmailField(verbose_name='Correo electronico')
+    correo   = models.CharField(max_length=50,verbose_name='Correo electronico')
     ciudad_recidencia = models.CharField(max_length = 50, verbose_name = 'Ciudada residencia')
     telefono = models.CharField(max_length=10,verbose_name='telefono')
+    password = models.TextField(max_length=128,verbose_name='clave')
     activo   = models.BooleanField(default=True)
+    last_login = models.DateTimeField(auto_now=True)
     
-class documentos(models.Model):
-    id_doc   = models.AutoField(primary_key=True)
-    nombre_doc   = models.CharField(max_length=30, verbose_name ='nombre')
-    documento = models.ImageField(upload_to ='documentos')
-    tipo_doc = models.CharField(max_length=5,verbose_name='tipo de documento')
-    tamano = models.CharField(max_length=20, verbose_name='tamano de documento')
-    proveedores = models.ForeignKey(proveedores, on_delete=models.CASCADE)
+    def save(self, *args, **kwargs):
+        if not self.pk or self._state.adding:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
 
+def get_documento_upload_path(instance, filename):
+    proveedor_id = instance.documentos.proveedores.id
+    return os.path.join('documentos', str(proveedor_id), filename)
+
+class Documento(models.Model):
+    archivo = models.FileField(upload_to=get_documento_upload_path)
+
+    
+class Documentos(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre_doc = models.CharField(max_length=30, verbose_name='Nombre')
+    documentos = models.ManyToManyField(Documento)
+    proveedores = models.ForeignKey(proveedores, on_delete=models.CASCADE)
 
 
 class servicios(models.Model):
