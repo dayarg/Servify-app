@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../../assets/img/logo.png';
 import Avatar from "../Avatar/Avatar";
+import { useNavigate } from "react-router-dom";
 
 export type DrawerProps = {
   userName: string;
@@ -16,6 +17,7 @@ export type DrawerProps = {
 
 const Drawer = ({ userName }: DrawerProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -74,6 +76,7 @@ const Drawer = ({ userName }: DrawerProps): JSX.Element => {
                 <button
                   className="block px-4 py-2 text-sm text-primary hover:bg-secondary hover:text-white w-full text-left"
                   role="menuitem"
+                  onClick={() => navigate('/')}
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                   Cerrar sesión

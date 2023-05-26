@@ -86,7 +86,7 @@ DATABASES = {
         "HOST":'LocalHost',
         "PORT": 3306,
         "USER": 'root',
-        "PASSWORD": 'password',
+        "PASSWORD": '',
         "NAME": 'servify',
         "OPTIONS":{
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"

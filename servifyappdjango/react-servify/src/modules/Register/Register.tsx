@@ -4,12 +4,62 @@ import Input from "../../components/Input/Input";
 import Electricista from "../../assets/img/electricista-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
+import { useState } from "react";
+
+interface FormData {
+  Nombre: string;
+  Apellido: string;
+  Correo_electronico: string;
+  identificacion: string;
+  telefono: string;
+  Ciudad_de_residencia: string;
+  Fecha_de_nacimiento: string;
+  Profesion: string;
+  password: string;
+}
 
 const Register = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<FormData>({
+    Nombre: "",
+    Apellido: "",
+    Correo_electronico: "",
+    identificacion: "",
+    telefono: "",
+    Ciudad_de_residencia: "",
+    Fecha_de_nacimiento: "",
+    Profesion: "",
+    password: "",
+  });
 
   const handleClick = () => {
-    navigate("/register-2");
+    fetch("http://127.0.0.1:8000/core/proveedores/resgister/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Hacer algo con la respuesta de la API, si es necesario
+        console.log(data);
+        const userId = data["user.id"];
+        if (userId) {
+          navigate(`/register-2/${userId}`);
+        } else {
+          // Manejar el caso en el que no se reciba el ID correctamente
+          console.error("No se pudo obtener el ID del usuario");
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleChange = (name: string, value: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -25,7 +75,9 @@ const Register = () => {
               <Input
                 label={"Nombre"}
                 type={"text"}
+                value={formData.Nombre}
                 placeholder={"Ingresa tu nombre"}
+                onChange={(value) => handleChange("Nombre", value)}
               />
             </div>
             <div className="mb-6">
@@ -33,6 +85,8 @@ const Register = () => {
                 label={"Apellido"}
                 type={"text"}
                 placeholder={"Ingresa tu apellido"}
+                value={formData.Apellido}
+                onChange={(value) => handleChange("Apellido", value)}
               />
             </div>
             <div className="mb-6">
@@ -40,6 +94,8 @@ const Register = () => {
                 label={"Correo electrónico"}
                 type={"email"}
                 placeholder={"Ingresa tu correo electrónico"}
+                value={formData.Correo_electronico}
+                onChange={(value) => handleChange("Correo_electronico", value)}
               />
             </div>
             <div className="mb-6">
@@ -47,6 +103,8 @@ const Register = () => {
                 label={"Identificacion"}
                 type={"text"}
                 placeholder={"Ingresa tu identificación"}
+                value={formData.identificacion}
+                onChange={(value) => handleChange("identificacion", value)}
               />
             </div>
             <div className="mb-6">
@@ -54,6 +112,8 @@ const Register = () => {
                 label={"Teléfono"}
                 type={"phone"}
                 placeholder={"Ingresa tu teléfono"}
+                value={formData.telefono}
+                onChange={(value) => handleChange("telefono", value)}
               />
             </div>
             <div className="mb-6">
@@ -61,12 +121,16 @@ const Register = () => {
                 label={"Ciudad de residencia"}
                 type={"text"}
                 placeholder={"Ingresa tu ciudad de residencia"}
+                value={formData.Ciudad_de_residencia}
+                onChange={(value) => handleChange("Ciudad_de_residencia", value)}
               />
             </div>
             <div className="mb-6">
               <DateInput
                 label="Fecha de nacimiento"
                 placeholder="Ingresa tu fecha de nacimiento"
+                value={formData.Fecha_de_nacimiento}
+                onChange={(value) => handleChange("Fecha_de_nacimiento", value)}
               />
             </div>
             <div className="mb-6">
@@ -74,6 +138,8 @@ const Register = () => {
                 label={"Profesión"}
                 type={"text"}
                 placeholder={"Ingresa tu profesión"}
+                value={formData.Profesion}
+                onChange={(value) => handleChange("Profesion", value)}
               />
             </div>
             <div className="mb-6">
@@ -81,6 +147,8 @@ const Register = () => {
                 label={"Contraseña"}
                 type={"password"}
                 placeholder={"Ingresa la contraseña"}
+                value={formData.password}
+                onChange={(value) => handleChange("password", value)}
               />
             </div>
             <div className="mt-2 w-32 float-right">

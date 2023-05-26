@@ -134,7 +134,9 @@ class proveedorView(View):
                                    correo=jd['Correo_electronico'], 
                                    telefono=jd['telefono'],
                                    password=jd['password'],)
-        datos = {'message': 'Succes'}
+        if proveedores.objects.exists():
+            proveedor = list(proveedores.objects.filter(identificacion=jd['identificacion']).values())
+            datos = {'message': 'Succes', 'user.id': proveedor[0]['id']}
         return JsonResponse(datos)
     
     def put(self, request, id):
@@ -197,23 +199,22 @@ class DocumentosView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        nombre_doc = request.POST.get('nombre_doc')  # Obtén el nombre del documento desde el formulario
-        proveedor_id = request.POST.get('proveedor_id')  # Obtén el ID del proveedor desde el formulario
+    def post(self, request, id=0, *args, **kwargs):
+        nombre_doc = request.POST.get('nombre_doc')
+        
         try:
-            proveedor = proveedores.objects.get(id=proveedor_id)
-            documentos = request.FILES.getlist('documentos')
-
-        # Crea un nuevo registro de Documentos asociado al proveedor
-            documentos_obj = Documentos.objects.create(nombre_doc=nombre_doc, proveedores=proveedor)
-
+            proveedor = proveedores.objects.get(id=id)
+            documentos = request.FILES.getlist('')
+            documentos_obj = Documentos.objects.create(
+                nombre_doc=nombre_doc, proveedores=proveedor)
 
         # Guarda los documentos y los asocia con el registro de Documentos
             for documento in documentos:
-                Documento.objects.create(archivo=documento, documentos=documentos_obj)
-
-            response = {'message': 'Documentos recibidos correctamente'}
+                Documento.objects.create(
+                    archivo=documento, documentos=documentos_obj)
+                response = {'message': 'Documentos recibidos correctamente'}
         except proveedores.DoesNotExist:
-            response = {'message': 'Proveedor no encontrado'}
-        return JsonResponse(response, status=400)
+            response={'error': 'Proveedor no existe'}
+        
+        return JsonResponse(response)
         
