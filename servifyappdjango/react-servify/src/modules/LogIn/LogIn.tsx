@@ -29,9 +29,9 @@ const LogIn = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Hacer algo con la respuesta de la API, si es necesario
+        const userName = data.user;
         console.log(data);
-        navigate("/proveedor-page");
+        navigate("/proveedor-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
   };

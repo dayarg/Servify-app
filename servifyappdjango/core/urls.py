@@ -12,7 +12,7 @@ urlpatterns = [
     path("proveedores/resgister/", proveedorView.as_view(), name="resgiterproveedor"),
     path("proveedores/<int:id>", proveedorView.as_view(), name="proveedor_process"),
     path("loginproveedor/", loginproveedor.as_view(), name="proveedor_login"),
-    path("documentosget/", DocumentosView.as_view(), name="get_documentos"),
+    path("documentosget/<int:id>", DocumentosView.as_view(), name="get_documentos"),
     ]
 
 

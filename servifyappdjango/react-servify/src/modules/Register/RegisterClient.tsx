@@ -44,10 +44,9 @@ const RegisterClient = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Hacer algo con la respuesta de la API, si es necesario
+        const userName = data.username;
         console.log(data);
-
-        navigate("/start-page");
+        navigate("/start-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
   };
