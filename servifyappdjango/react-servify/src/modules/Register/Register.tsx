@@ -42,11 +42,11 @@ const Register = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Hacer algo con la respuesta de la API, si es necesario
+        const userName = data.username;
         console.log(data);
         const userId = data["user.id"];
         if (userId) {
-          navigate(`/register-2/${userId}`);
+          navigate(`/register-2/${userId}`, { state: { userName } });
         } else {
           // Manejar el caso en el que no se reciba el ID correctamente
           console.error("No se pudo obtener el ID del usuario");

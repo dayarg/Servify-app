@@ -100,7 +100,6 @@ class Documento(models.Model):
     
 class Documentos(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre_doc = models.CharField(max_length=30, verbose_name='Nombre')
     documentos = models.ManyToManyField(Documento)
     proveedores = models.ForeignKey(proveedores, on_delete=models.CASCADE)
 
