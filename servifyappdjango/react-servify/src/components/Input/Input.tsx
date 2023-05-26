@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -15,7 +15,7 @@ const Input = ({ label, type, placeholder,value, onChange }: InputProps): JSX.El
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     setValue2(inputValue);
 

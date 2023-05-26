@@ -6,7 +6,6 @@ import Mecanico from "../../assets/img/mecanico-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
 import Checkbox from "../../components/Checkbox/Checkbox";
-import moment from 'moment';
 
 interface RegisterClientProps {
   identificacion: string;
@@ -20,8 +19,6 @@ interface RegisterClientProps {
 }
 
 const RegisterClient = () => {
-
-
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState<RegisterClientProps>({
@@ -49,6 +46,7 @@ const RegisterClient = () => {
       .then((data) => {
         // Hacer algo con la respuesta de la API, si es necesario
         console.log(data);
+
         navigate("/start-page");
       })
       .catch((error) => console.error(error));
@@ -61,7 +59,7 @@ const RegisterClient = () => {
   };
 
   const terms =
-    "He leído y acepto los términos y condiciones de la política de privacidad de Pospet";
+    "He leído y acepto los términos y condiciones de la política de privacidad de Servify";
 
   return (
     <div className="flex flex-col">
@@ -77,7 +75,7 @@ const RegisterClient = () => {
                 label={"Nombre"}
                 type={"text"}
                 placeholder={"Ingresa tu nombre"}
-                value={formData.Nombre || ""}
+                value={formData.Nombre}
                 onChange={(value) => handleChange("Nombre", value)}
               />
             </div>
@@ -86,7 +84,7 @@ const RegisterClient = () => {
                 label={"Apellido"}
                 type={"text"}
                 placeholder={"Ingresa tu apellido"}
-                value={formData.Apellido || ""}
+                value={formData.Apellido}
                 onChange={(value) => handleChange("Apellido", value)}
               />
             </div>
@@ -95,7 +93,7 @@ const RegisterClient = () => {
                 label={"Correo electrónico"}
                 type={"email"}
                 placeholder={"Ingresa tu correo electrónico"}
-                value={formData.Correo_electronico || ""}
+                value={formData.Correo_electronico}
                 onChange={(value) => handleChange("Correo_electronico", value)}
               />
             </div>
@@ -104,7 +102,7 @@ const RegisterClient = () => {
                 label={"Identificacion"}
                 type={"text"}
                 placeholder={"Ingresa tu identificación"}
-                value={formData.identificacion || ""}
+                value={formData.identificacion}
                 onChange={(value) => handleChange("identificacion", value)}
               />
             </div>
@@ -113,7 +111,7 @@ const RegisterClient = () => {
                 label={"Teléfono"}
                 type={"phone"}
                 placeholder={"Ingresa tu teléfono"}
-                value={formData.telefono || ""}
+                value={formData.telefono}
                 onChange={(value) => handleChange("telefono", value)}
               />
             </div>
@@ -122,7 +120,7 @@ const RegisterClient = () => {
                 label={"Ciudad de residencia"}
                 type={"text"}
                 placeholder={"Ingresa tu ciudad de residencia"}
-                value={formData.Ciudad_de_residencia || ""}
+                value={formData.Ciudad_de_residencia}
                 onChange={(value) => handleChange("Ciudad_de_residencia", value)}
               />
             </div>
@@ -130,7 +128,7 @@ const RegisterClient = () => {
               <DateInput
                 label="Fecha de nacimiento"
                 placeholder="Ingresa tu fecha de nacimiento"
-                value={formData.Fecha_de_nacimiento || ""}
+                value={formData.Fecha_de_nacimiento}
                 onChange={(value) => handleChange("Fecha_de_nacimiento", value)}
               />
             </div>
@@ -139,7 +137,7 @@ const RegisterClient = () => {
                 label={"Contraseña"}
                 type={"password"}
                 placeholder={"Ingresa la contraseña"}
-                value={formData.password || ""}
+                value={formData.password}
                 onChange={(value) => handleChange("password", value)}
               />
             </div>

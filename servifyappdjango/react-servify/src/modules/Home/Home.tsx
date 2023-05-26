@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <div className="h-screen w-full flex flex-col">
-      {breakPoint === "sm" ? <DrawerHome careers="client"/> : <DrawerMobile careers="client"/>}
+      {breakPoint === "sm" ? <DrawerHome careers="client" /> : <DrawerMobile careers="client"/>}
       <div className="flex-1 flex flex-col items-center justify-center">
         {breakPoint === "sm" ? (
           <img src={Banner} alt="Banner servify" className="w-full mt-12" />
