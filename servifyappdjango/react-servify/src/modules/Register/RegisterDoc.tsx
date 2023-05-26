@@ -1,18 +1,49 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Carpintero from "../../assets/img/carpintero-banner.jpg";
 import Uploader from "../../components/Uploader/Uploader";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
+import { useState } from "react";
+
+interface FormDataDoc {
+  nombre_doc: string;
+  proveedor_id:number;
+}
 
 const RegisterDoc = () => {
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const terms =
-    "He leído y acepto los términos y condiciones de la política de privacidad de Pospet";
+  const [nombreArchivo, setNombreArchivo] = useState("");
+
+  const handleFileSelect = (file: File) => {
+    setNombreArchivo(file.name);
+  };
 
   const handleClick = () => {
-    navigate("/start-page");
+    const formDataDoc: FormDataDoc = {
+      nombre_doc: nombreArchivo,
+      // eslint-disable-next-line no-mixed-operators
+      proveedor_id: userId && parseInt(userId) || 0, // Modificado para obtener correctamente el ID del usuario
+    };
+
+    fetch("http://127.0.0.1:8000/core/documentosget/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formDataDoc),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        navigate("/proveedor-page");
+      })
+      .catch((error) => console.error(error));
   };
+  
+  const terms =
+    "He leído y acepto los términos y condiciones de la política de privacidad de Servify";
 
   return (
     <div className="flex flex-col">
@@ -24,16 +55,16 @@ const RegisterDoc = () => {
           </h1>
           <div className="px-14">
             <div className="mb-10">
-              <Uploader label="Documento de identidad lado frontal" />
+              <Uploader label="Documento de identidad lado frontal" onFileSelect={handleFileSelect}/>
             </div>
             <div className="mb-10">
-              <Uploader label="Documento de identidad lado posterior" />
+              <Uploader label="Documento de identidad lado posterior" onFileSelect={handleFileSelect}/>
             </div>
             <div className="mb-10">
-              <Uploader label="Certificación profesional" />
+              <Uploader label="Certificación profesional" onFileSelect={handleFileSelect}/>
             </div>
             <div className="mb-10">
-              <Uploader label="Evidencia de experiencia" />
+              <Uploader label="Evidencia de experiencia" onFileSelect={handleFileSelect}/>
             </div>
             <div className="mb-10">
               <Checkbox id="checkbox-legal" label={terms} />

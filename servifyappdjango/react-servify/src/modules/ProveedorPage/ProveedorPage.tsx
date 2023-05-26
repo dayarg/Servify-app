@@ -29,9 +29,9 @@ const ProveedorPage: React.FC = () => {
               {peopleService &&
                 peopleService.length > 0 &&
                 peopleService.map((person, index) => (
-                  <div className="mb-4">
+                  <div className="mb-4" key={`service-${index}`}>
                     <InformationCard
-                      key={index} // Agrega una clave única para cada elemento
+                      key={person.id} // Agrega una clave única para cada elemento
                       nombre={person.nombre}
                       fecha={person.fecha}
                       hora={person.hora}
@@ -60,9 +60,9 @@ const ProveedorPage: React.FC = () => {
               {peopleCalification &&
                 peopleCalification.length > 0 &&
                 peopleCalification.map((person, index) => (
-                  <div className="mb-4">
+                  <div className="mb-4" key={`calification-${index}`}>
                     <CalificationCard
-                      key={index} // Agrega una clave única para cada elemento
+                      key={person.id} // Agrega una clave única para cada elemento
                       userName={person.nombre}
                       rating={person.calificacion}
                       comment={person.opinion}

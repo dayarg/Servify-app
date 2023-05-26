@@ -3,17 +3,51 @@ import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Mudanza from "../../assets/img/mudanza-banner.jpg";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
+import { useState } from "react";
 
+
+interface LogInClientProps {
+  Correo_electronico: string;
+  password: string;
+}
 
 const LogInClient = () => {
   const navigate = useNavigate();
-
+  const [formData, setFormData] = useState<LogInClientProps>({
+    Correo_electronico:"",
+    password:"",
+  });
 
   const handleClick = () => {
+    fetch("http://127.0.0.1:8000/core/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Hacer algo con la respuesta de la API, si es necesario
+        const userName = data.user;
+        console.log(data);
+        navigate("/start-page", { state: { userName } });
+      })
+      .catch((error) => console.error(error));
+  };
+  const handleChange = (name: string, value: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+
+  /* const handleClick = () => {
     // Lógica de inicio de sesión
       navigate("/start-page");
 
-  };
+  }; */
 
   return (
     <div className="flex flex-col">
@@ -29,6 +63,8 @@ const LogInClient = () => {
                 label={"Correo electrónico"}
                 type={"email"}
                 placeholder={"Ingresa tu correo electrónico"}
+                value={formData.Correo_electronico}
+                onChange={(value) => handleChange("Correo_electronico", value)}
               />
             </div>
 
@@ -37,6 +73,8 @@ const LogInClient = () => {
                 label={"Contraseña"}
                 type={"password"}
                 placeholder={"Ingresa la contraseña"}
+                value={formData.password}
+                onChange={(value) => handleChange("password", value)}
               />
             </div>
             <div className="mt-2 w-32 mx-auto">
