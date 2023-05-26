@@ -1,18 +1,18 @@
 from django.urls import path, include
-from rest_framework import routers
-##from .views import usuario_insersion
 from .views import userview
 from .views import loginuser
+from .views import proveedorView
+from .views import loginproveedor
+from .views import DocumentosView
 
-router = routers.DefaultRouter()
-## usuario es la peticion del cual se obtiene el archivo json con los datos 
-## 
-##router.register(r'usuario', usuario_insersion, 'usuarios')
 urlpatterns = [
-    path("api/servify/", include(router.urls)),
     path("resgister/", userview.as_view(), name="resgiteruser"),
     path("resgister/<int:id>", userview.as_view(), name="user_process"),
     path("login/", loginuser.as_view(), name="user_login"),
+    path("proveedores/resgister/", proveedorView.as_view(), name="resgiterproveedor"),
+    path("proveedores/<int:id>", proveedorView.as_view(), name="proveedor_process"),
+    path("loginproveedor/", loginproveedor.as_view(), name="proveedor_login"),
+    path("documentosget/", DocumentosView.as_view(), name="get_documentos"),
     ]
 
 
