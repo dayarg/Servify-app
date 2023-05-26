@@ -4,8 +4,11 @@ import Drawer from "../../components/Drawer/Drawer";
 import InformationCard from "../../components/InformationCard/InformationCard";
 import CalificationCard from "../../components/CalificationCard/CalificationCard";
 import ModalAccept from "../../components/ModalAccept/ModalAccept";
+import { useLocation } from "react-router-dom";
 
 const ProveedorPage: React.FC = () => {
+  const location = useLocation();
+    const userName = location.state?.userName || ""; 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -18,7 +21,7 @@ const ProveedorPage: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <Drawer userName={"Carlos Parra"} />
+      <Drawer userName={userName} />
       <div className="flex-1 flex flex-col w-full mt-20">
         <div className="flex-none md:flex">
           <div className="md:block md:w-1/2">

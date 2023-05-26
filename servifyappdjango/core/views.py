@@ -45,7 +45,10 @@ class userview(View):
         jd = json.loads(request.body)
         usuarios.objects.create(identificacion=jd['identificacion'], nombre_user=jd['Nombre'], apellido_user=jd['Apellido'], fecha_nacimiento=jd['Fecha_de_nacimiento'],
                                 ciudad_recidencia=jd['Ciudad_de_residencia'], correo=jd['Correo_electronico'], telefono=jd['telefono'], password=jd['password'],)
-        datos = {'message': 'Succes'}
+        if usuarios.objects.exists():
+            user = list(usuarios.objects.filter(
+                identificacion=jd['identificacion']).values())
+            datos = {'message': 'Succes', 'user.id': user[0]['id'], 'username': user[0]['nombre_user']}
         return JsonResponse(datos)
 
     def put(self, request, id):
@@ -136,7 +139,7 @@ class proveedorView(View):
                                    password=jd['password'],)
         if proveedores.objects.exists():
             proveedor = list(proveedores.objects.filter(identificacion=jd['identificacion']).values())
-            datos = {'message': 'Succes', 'user.id': proveedor[0]['id']}
+            datos = {'message': 'Succes', 'user.id': proveedor[0]['id'],'username': proveedor[0]['nombre_pro']}
         return JsonResponse(datos)
     
     def put(self, request, id):
@@ -200,19 +203,18 @@ class DocumentosView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, id=0, *args, **kwargs):
-        nombre_doc = request.POST.get('nombre_doc')
         
         try:
             proveedor = proveedores.objects.get(id=id)
-            documentos = request.FILES.getlist('')
+            documentos = request.FILES.getlist('file')
             documentos_obj = Documentos.objects.create(
-                nombre_doc=nombre_doc, proveedores=proveedor)
+                proveedores=proveedor)
 
         # Guarda los documentos y los asocia con el registro de Documentos
             for documento in documentos:
                 Documento.objects.create(
                     archivo=documento, documentos=documentos_obj)
-                response = {'message': 'Documentos recibidos correctamente'}
+            response = {'message': 'Documentos recibidos correctamente', "proveedor": proveedor.nombre_pro}
         except proveedores.DoesNotExist:
             response={'error': 'Proveedor no existe'}
         

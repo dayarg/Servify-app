@@ -7,27 +7,40 @@ import BasicDrawer from "../../components/Drawer/BasicDrawer";
 import { useState } from "react";
 
 interface FormDataDoc {
-  nombre_doc: string;
-  proveedor_id:number;
+  proveedor_id: number;
+  archivos: {
+    frontal: string;
+    posterior: string;
+    certificacion: string;
+    experiencia: string;
+  };
 }
 
 const RegisterDoc = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
-  const [nombreArchivo, setNombreArchivo] = useState("");
+  const [archivos, setArchivos] = useState({
+    frontal: "",
+    posterior: "",
+    certificacion: "",
+    experiencia: "",
+  });
 
-  const handleFileSelect = (file: File) => {
-    setNombreArchivo(file.name);
+  const handleFileSelect = (file: File, tipo: string) => {
+    setArchivos((prevState) => ({
+      ...prevState,
+      [tipo]: file.name,
+    }));
   };
 
   const handleClick = () => {
     const formDataDoc: FormDataDoc = {
-      nombre_doc: nombreArchivo,
       // eslint-disable-next-line no-mixed-operators
-      proveedor_id: userId && parseInt(userId) || 0, // Modificado para obtener correctamente el ID del usuario
+      proveedor_id: userId && parseInt(userId) || 0,
+      archivos: archivos,
     };
 
-    fetch("http://127.0.0.1:8000/core/documentosget/", {
+    fetch(`http://127.0.0.1:8000/core/documentosget/${formDataDoc.proveedor_id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,12 +49,13 @@ const RegisterDoc = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        const userName = data.proveedor;
         console.log(data);
-        navigate("/proveedor-page");
+        navigate("/proveedor-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
   };
-  
+
   const terms =
     "He leído y acepto los términos y condiciones de la política de privacidad de Servify";
 
@@ -55,16 +69,28 @@ const RegisterDoc = () => {
           </h1>
           <div className="px-14">
             <div className="mb-10">
-              <Uploader label="Documento de identidad lado frontal" onFileSelect={handleFileSelect}/>
+              <Uploader
+                label="Documento de identidad lado frontal"
+                onFileSelect={(file) => handleFileSelect(file, "frontal")}
+              />
             </div>
             <div className="mb-10">
-              <Uploader label="Documento de identidad lado posterior" onFileSelect={handleFileSelect}/>
+              <Uploader
+                label="Documento de identidad lado posterior"
+                onFileSelect={(file) => handleFileSelect(file, "posterior")}
+              />
             </div>
             <div className="mb-10">
-              <Uploader label="Certificación profesional" onFileSelect={handleFileSelect}/>
+              <Uploader
+                label="Certificación profesional"
+                onFileSelect={(file) => handleFileSelect(file, "certificacion")}
+              />
             </div>
             <div className="mb-10">
-              <Uploader label="Evidencia de experiencia" onFileSelect={handleFileSelect}/>
+              <Uploader
+                label="Evidencia de experiencia"
+                onFileSelect={(file) => handleFileSelect(file, "experiencia")}
+              />
             </div>
             <div className="mb-10">
               <Checkbox id="checkbox-legal" label={terms} />
