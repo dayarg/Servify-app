@@ -1,7 +1,7 @@
 import React from 'react';
 import loadingAnimation from '../../assets/image/loader.gif';
 
-const Loader: React.FC = () => {
+const Loading: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <img src={loadingAnimation} alt="Loading" />
@@ -9,4 +9,4 @@ const Loader: React.FC = () => {
   );
 };
 
-export default Loader;
+export default Loading;
