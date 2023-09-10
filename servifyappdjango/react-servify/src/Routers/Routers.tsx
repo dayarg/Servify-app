@@ -11,7 +11,7 @@ import ServiceDetail from "../modules/ServiceDetail/ServiceDetail";
 import ProveedorPage from "../modules/ProveedorPage/ProveedorPage";
 import Administrator from "../modules/Administrator/Administrator";
 import LogInClient from "../modules/LogIn/LogInClient";
-import Loader from "../components/Loader/Loader";
+import Loading from "../components/Loading/Loading";
 
 const Routers = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +27,7 @@ const Routers = () => {
     <BrowserRouter>
       {isLoading ? (
         <div className="flex justify-center items-center w-full h-full">
-          <Loader />
+          <Loading />
         </div>
       ) : (
         <Routes>
