@@ -11,7 +11,7 @@ import ServiceDetail from "../modules/ServiceDetail/ServiceDetail";
 import ProveedorPage from "../modules/ProveedorPage/ProveedorPage";
 import Administrator from "../modules/Administrator/Administrator";
 import LogInClient from "../modules/LogIn/LogInClient";
-import Loader from "../components/Loader/loader";
+import Loader from "../components/Loader/Loader";
 
 const Routers = () => {
   const [isLoading, setIsLoading] = useState(true);
