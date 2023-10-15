@@ -95,7 +95,7 @@ class loginuser(View):
                 for user in users:
                     if check_password(password, user.password):
                         login(request, user)
-                        return JsonResponse({'message': 'Login successful', 'user': user.nombre_user})
+                        return JsonResponse({'message': 'Login successful', 'user': user.nombre_user, 'id': user.id})
                 return JsonResponse({'message': 'Invalid username or password'}, status=400)
             else:
                 return JsonResponse({'message': 'Invalid username or password'}, status=400)
@@ -103,16 +103,7 @@ class loginuser(View):
             return JsonResponse({'error': 'Invalid username or password'}, status=400)
 
 
-    def get(self,request, id=0):
-        users =list(usuarios.objects.filter(id=id).values())
-        if len(users) > 0:
-            user = users[0]
-            datos = {'message': 'Succes', 'users': user}
-        else:
-            datos = {'message': 'User not found ...'}
-        return JsonResponse(datos)
-
-
+   
 class proveedorView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -197,13 +188,34 @@ class loginproveedor(View):
                 for user in users:
                     if check_password(password, user.password):
                         login(request, user)
-                        return JsonResponse({'message': 'Login successful', 'user': user.nombre_pro})
+                        return JsonResponse({'message': 'Login successful', 'user': user.nombre_pro, 'id': user.id})
                 return JsonResponse({'message': 'Invalid username or password'}, status=400)
             else:
                 return JsonResponse({'message': 'Invalid username or password'}, status=400)
         except proveedores.DoesNotExist:
             return JsonResponse({'error': 'Invalid username or password'}, status=400)
 
+    
+class user(View):
+    @method_decorator(csrf_exempt)  
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    
+    def get(self,request, id=0):
+       users =list(usuarios.objects.filter(id=id).values())
+       if len(users) > 0:
+           user = users[0]
+           datos = {'message': 'Succes', 'users': user}
+       else:
+           datos = {'message': 'User not found ...'}
+       return JsonResponse(datos)
+
+class provedor(View):
+    @method_decorator(csrf_exempt)  
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+ 
     def get(self,request, id=0):
         users =list(proveedores.objects.filter(id=id).values())
         if len(users) > 0:
@@ -213,8 +225,7 @@ class loginproveedor(View):
             datos = {'message': 'User not found ...'}
         return JsonResponse(datos)
 
-
-
+ 
 
 class DocumentosView(View):
     @method_decorator(csrf_exempt)
