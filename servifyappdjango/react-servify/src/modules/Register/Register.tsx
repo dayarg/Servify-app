@@ -43,7 +43,6 @@ const Register = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.username;
-        console.log(data);
         const userId = data["user.id"];
         if (userId) {
           navigate(`/register-2/${userId}`, { state: { userName } });

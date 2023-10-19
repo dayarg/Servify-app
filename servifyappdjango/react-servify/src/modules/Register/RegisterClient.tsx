@@ -45,7 +45,6 @@ const RegisterClient = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.username;
-        console.log(data);
         navigate("/start-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
