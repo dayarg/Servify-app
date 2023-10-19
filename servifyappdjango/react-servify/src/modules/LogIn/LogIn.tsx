@@ -30,7 +30,6 @@ const LogIn = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.user;
-        console.log(data);
         navigate("/proveedor-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
