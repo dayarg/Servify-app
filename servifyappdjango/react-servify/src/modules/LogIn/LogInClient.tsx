@@ -30,7 +30,6 @@ const LogInClient = () => {
       .then((data) => {
         // Hacer algo con la respuesta de la API, si es necesario
         const userName = data.user;
-        console.log(data);
         navigate("/start-page", { state: { userName } });
       })
       .catch((error) => console.error(error));

@@ -50,7 +50,6 @@ const RegisterDoc = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.proveedor;
-        console.log(data);
         navigate("/proveedor-page", { state: { userName } });
       })
       .catch((error) => console.error(error));
