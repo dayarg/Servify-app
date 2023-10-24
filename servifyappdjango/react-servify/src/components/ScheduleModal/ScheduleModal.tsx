@@ -7,11 +7,12 @@ import Textarea from "../Textarea/Textarea";
 
 export type ScheduleModalProps = {
   isOpen: boolean;
+  onClick: () => void;
   onClose: () => void;
   disabled?: boolean;
 };
 
-const ScheduleModal = ({ isOpen, onClose, disabled }: ScheduleModalProps) => {
+const ScheduleModal = ({ isOpen, onClose, onClick, disabled }: ScheduleModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -44,6 +45,13 @@ const ScheduleModal = ({ isOpen, onClose, disabled }: ScheduleModalProps) => {
                   Agenda el servicio
                 </h3>
                 <div className="mt-2 flex flex-wrap">
+                  <div className="w-full ">
+                    <Input
+                      label={"Correo electrónico"}
+                      type={"text"}
+                      placeholder={"Ingresa tu correo electrónico"}
+                    />
+                  </div>
                   <div className="w-full sm:w-1/2 sm:pr-2">
                     <Input
                       label={"Nombre"}
@@ -85,7 +93,7 @@ const ScheduleModal = ({ isOpen, onClose, disabled }: ScheduleModalProps) => {
             <div className="flex flex-col items-center justify-center space-y-2.5 sm:flex-row sm:space-y-0 sm:space-x-2">
               <Button
                 id={"btnAccept"}
-                onClick={onClose}
+                onClick={onClick}
                 theme="primary"
                 type="submit"
                 disabled={disabled}

@@ -30,7 +30,8 @@ const LogIn = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.user;
-        navigate("/proveedor-page", { state: { userName } });
+        const userId = data.id;
+        navigate("/proveedor-page", { state: { userName, userId } });
       })
       .catch((error) => console.error(error));
   };

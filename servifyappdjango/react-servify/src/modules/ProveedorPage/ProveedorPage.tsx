@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { peopleService, peopleCalification } from "./model";
 import Drawer from "../../components/Drawer/Drawer";
 import InformationCard from "../../components/InformationCard/InformationCard";
@@ -8,7 +8,28 @@ import { useLocation } from "react-router-dom";
 
 const ProveedorPage: React.FC = () => {
   const location = useLocation();
-    const userName = location.state?.userName || ""; 
+  const userName = location.state?.userName || "";
+  const userId = location.state?.userId || "";
+  const message = location.state?.message || "";
+
+  const saveLoginDataToLocalStorage = (data: any) => {
+    localStorage.setItem("loginData", JSON.stringify(data));
+  };
+
+  useEffect(() => {
+    const loginData = {
+      message: message,
+      user: userName,
+      id: userId,
+    };
+
+    saveLoginDataToLocalStorage(loginData);
+  }, [userName, userId, message]);
+
+  const storedLoginDataJSON = localStorage.getItem("loginData");
+  const storedLoginData = storedLoginDataJSON
+    ? JSON.parse(storedLoginDataJSON)
+    : {};
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,7 +42,7 @@ const ProveedorPage: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <Drawer userName={userName} />
+      <Drawer userName={storedLoginData.user} />
       <div className="flex-1 flex flex-col w-full mt-20">
         <div className="flex-none md:flex">
           <div className="md:block md:w-1/2">
