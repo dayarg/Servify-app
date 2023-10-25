@@ -8,6 +8,7 @@ from .models import usuarios
 from .models import proveedores
 from .models import Documento
 from .models import Documentos
+from .models import servicios
 from django.views import View
 import json
 # Create your views here.
@@ -249,4 +250,35 @@ class DocumentosView(View):
             response={'error': 'Proveedor no existe'}
         
         return JsonResponse(response)
-        
+
+    
+class  ServiciosView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self , request, id=0, *args, **kwargs ):
+        json_data = json.loads(request.body)
+        Correo = json_data.get('Correo_electronico')
+        users = usuarios.objects.filter(correo=Correo)
+        if users.exists():
+                iduser = users[0]
+                provedor = proveedores.objects.get(id=id)
+                servicios.objects.create(
+                    nombre_ser=json_data['Nombreservicio'],
+                    fecha_ser=json_data['Fecha'],
+                    hora_ser=json_data['Hora'],
+                    precio_ser=0,
+                    calificacion=0,
+                    descripcion=json_data['Descripcion'],
+                    proveedor=provedor,
+                    usuarios=iduser,)
+                response = {'message': 'Servicio registrado correctamente'}
+        else:
+                response = {'message': 'Error al crear el servicio'}
+
+        return JsonResponse(response)
+
+
+
+
