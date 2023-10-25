@@ -18,7 +18,7 @@ const Home = () => {
           <img
             src={BannerMobile}
             alt="Banner Mobile"
-            className="w-full h-auto mt-28"
+            className="w-full h-auto mt-20"
           />
         )}
         <ServifyComponent

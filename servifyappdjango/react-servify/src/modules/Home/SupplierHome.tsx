@@ -1,6 +1,6 @@
 import DrawerHome from "../../components/Drawer/DrawerHome";
 import ClientBanner from "../../assets/img/client-banner.png";
-import BannerMobile from "../../assets/img/bannerMobile.png";
+import BannerMobileSupplier from "../../assets/img/bannerMobileSupplier.png";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import DrawerMobile from "../../components/Drawer/DrawerMobile";
 import ServifyComponent from "../../components/ServifyComponent/ServifyComponent";
@@ -24,9 +24,9 @@ const SupplierHome = () => {
           />
         ) : (
           <img
-            src={BannerMobile}
+            src={BannerMobileSupplier}
             alt="Banner Mobile"
-            className="w-full h-auto mt-28"
+            className="w-full h-auto mt-20"
           />
         )}
         <ServifyComponent

@@ -30,8 +30,9 @@ const LogInClient = () => {
       .then((data) => {
         // Hacer algo con la respuesta de la API, si es necesario
         const userName = data.user;
-        console.log(data);
-        navigate("/start-page", { state: { userName } });
+        const userId = data.id;
+        const message = data.message;
+        navigate("/start-page", { state: { userName, userId, message } });
       })
       .catch((error) => console.error(error));
   };
