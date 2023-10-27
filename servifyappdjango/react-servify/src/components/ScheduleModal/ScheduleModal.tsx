@@ -52,7 +52,7 @@ const ScheduleModal = ({ isOpen, onClose, onClick, disabled }: ScheduleModalProp
                       placeholder={"Ingresa tu correo electrónico"}
                     />
                   </div>
-                  <div className="w-full sm:w-1/2 sm:pr-2">
+                  {/* <div className="w-full sm:w-1/2 sm:pr-2">
                     <Input
                       label={"Nombre"}
                       type={"text"}
@@ -65,7 +65,7 @@ const ScheduleModal = ({ isOpen, onClose, onClick, disabled }: ScheduleModalProp
                       type={"text"}
                       placeholder={"Ingresa tu nombre"}
                     />
-                  </div>
+                  </div> */}
                   <div className="w-full sm:w-1/2 sm:pr-2">
                     <TimeInput
                       label={"Hora"}

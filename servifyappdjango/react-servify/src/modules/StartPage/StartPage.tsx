@@ -210,7 +210,7 @@ const StartPage = () => {
           </div>
         )}
         <div className="p-10 pt-6">
-          <h1 className="text-lg font-bold">
+          <h1 className="text-lg font-bold text-primary-blue">
             Escoge el servicio que deseas solicitar
           </h1>
           <div className="mt-8">

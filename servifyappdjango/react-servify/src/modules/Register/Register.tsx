@@ -5,9 +5,7 @@ import Input from "../../components/Input/Input";
 import Electricista from "../../assets/img/electricista-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
-import { homeServices } from "../../components/Drawer/models";
-import DropdownMenu from "../../components/DropdownMenu/DropdownM";
-
+import Dropdown from "../../components/DropdownMenu/Dropdown";
 
 interface FormData {
   Nombre: string;
@@ -36,7 +34,7 @@ const Register = () => {
   });
 
   const handleClick = () => {
-    fetch("http://127.0.0.1:8000/core/proveedores/register/", {
+    fetch("http://127.0.0.1:8000/core/proveedores/resgister/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,18 +62,18 @@ const Register = () => {
   };
 
   const profesiones = [
-    { label: "Veterinario", link: "/Veterinario" },
-    { label: "Albañil",  link: "/Albañil" },
-    { label: "Plomero",  link: "/plomero" },
-    { label: "Electricista",  link: "/Electricista" },
-    { label: "Mecanico",  link: "Mecanico" },
-    { label: "Profesor", link: "/Profeso" },
-    { label: "Carpintero",  link: "/Carpintero" },
-    { label: "Jardinero",  link: "/Jardinero" },
-    { label: "Cerrajero",  link: "/Cerrajero" },
-    { label: "Aseador",  link: "/Aseador" },
-    { label: "Maquillista",  link: "/Maquillista" },
-    { label: "Mudanzas",  link: "/Mudanzas" },
+    { label: "Veterinario/a", value: "veterinario" },
+    { label: "Albañil", value: "albañil" },
+    { label: "Plomero/a", value: "plomero" },
+    { label: "Electricista", value: "electricista" },
+    { label: "Mecanico/a", value: "mecanico" },
+    { label: "Profesor/a", value: "profesor" },
+    { label: "Carpintero/a", value: "carpintero" },
+    { label: "Jardinero/a", value: "jardinero" },
+    { label: "Cerrajero/a", value: "cerrajero" },
+    { label: "Aseador/a", value: "aseador" },
+    { label: "Maquillista", value: "maquillista" },
+    { label: "Mudanzas", value: "mudanzas" },
   ];
 
   return (
@@ -133,12 +131,13 @@ const Register = () => {
               />
             </div>
             <div className="mb-6">
-              <Input
-                label={"Ciudad de residencia"}
-                type={"text"}
-                value={formData.Ciudad_de_residencia}
-                placeholder={"Ingresa tu ciudad de residencia"}
-                onChange={(value) => handleChange("Ciudad_de_residencia", value)}
+            <Dropdown
+                id="dropdownMenu"
+                label="Selecciona una ciudad"
+                options={[{label: 'Bogotá', value: 'Bogota'}]}
+                selectedOption={formData.Ciudad_de_residencia}
+                onOptionSelect={(value) => {
+                  handleChange("Ciudad_de_residencia", value)}}
               />
             </div>
             <div className="mb-6">
@@ -150,14 +149,20 @@ const Register = () => {
               />
             </div>
             <div className="mb-6">
-              <label className="text-primary mb-1 font-bold" htmlFor="Profesion">
+              <label
+                className="text-primary mb-1 font-bold"
+                htmlFor="Profesion"
+              >
                 Profesión
               </label>
-              <DropdownMenu
-            id="dropdownMenu"
-            label="Ingresa tu profesión" 
-            options={homeServices}
-          />
+              <Dropdown
+                id="dropdownMenu"
+                label="Selecciona una profesión"
+                options={profesiones}
+                selectedOption={formData.Profesion}
+                onOptionSelect={(value) => {
+                  handleChange("Profesion", value)}}
+              />
             </div>
             <div className="mb-6">
               <Input
@@ -165,7 +170,7 @@ const Register = () => {
                 type={"password"}
                 value={formData.password}
                 placeholder={"Ingresa la contraseña"}
-                onChange={(value) => handleChange("password", value)}
+                onChange={(value) => {handleChange("password", value)}}
               />
             </div>
             <div className="mt-2 w-32 float-right">

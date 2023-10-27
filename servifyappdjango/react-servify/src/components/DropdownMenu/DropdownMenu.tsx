@@ -31,6 +31,7 @@ function DropdownMenu({ id, label, options }: DropdownMenuProps): JSX.Element {
           className={`ml-2 transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
+
       {isOpen && (
         <div
           className="origin-center absolute top-10 left-1/2 transform -translate-x-1/2 mt-2 w-56 rounded-md focus:outline-none"
@@ -38,12 +39,12 @@ function DropdownMenu({ id, label, options }: DropdownMenuProps): JSX.Element {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <div className="py-1 bg-white shadow-md border border-light-grey rounded-md font-medium" role="none">
+          <div className="py-1 bg-white shadow-md border border-light-grey rounded-md text-secondary font-medium" role="none">
             {options.map((option, index) => (
               <a
                 key={option.link}
                 href={option.link}
-                className={`block px-4 py-2 text-sm text-gray-700 hover:text-primary ${index !== options.length - 1 && ''}`}
+                className={`block px-4 py-2 text-sm text-gray-700 hover:text-primary ${index !== options.length - 1 && 'border-b border-light-grey'}`}
                 role="menuitem"
               >
                 {option.label}

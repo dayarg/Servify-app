@@ -8,6 +8,7 @@ module.exports = {
     colors: {
       primary: '#28294D',
       secondary: '#087E8B',
+      'primary-blue': '#030534',
       'blue-persa': '#3227C4',
       lavanda: '#D4CAFF',
       magnolia: '#F5F2F9',
