@@ -4,7 +4,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../../assets/img/logo.png";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { homeServices } from "./models";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
 export type DrawerMobileProps = {
@@ -14,6 +14,7 @@ export type DrawerMobileProps = {
 const DrawerMobile = ({careers}: DrawerMobileProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClickLogIn = () => {
     navigate("/login");
@@ -23,15 +24,10 @@ const DrawerMobile = ({careers}: DrawerMobileProps): JSX.Element => {
     setIsOpen(!isOpen);
   };
 
-  const handleHelpClick = () => {
-    navigate("/login");
-    setIsOpen(false);
-  };
-
-  const handleWorkClick = () => {
+  /* const handleWorkClick = () => {
     careers === 'client' ? navigate("/home-supplier") : careers === 'supplier' && navigate("/");
     setIsOpen(false);
-  };
+  }; */
 
   const handleContactClick = () => {
     navigate("/login");
@@ -68,19 +64,26 @@ const DrawerMobile = ({careers}: DrawerMobileProps): JSX.Element => {
               />
             </div>
             <div className="mb-6 text-primary">
-              <button
+              {/* <button
                 type="button"
                 className="block w-full text-center py-4 text-sm font-medium hover:text-secondary"
                 onClick={handleHelpClick}
               >
                 Ayuda
+              </button> */}
+              <button
+                type="button"
+                className={`block w-full text-center py-4 text-sm font-medium hover:text-secondary ${location.pathname === '/' && 'text-secondary'}`}
+                onClick={() => navigate('/')}
+              >
+                Quiero solicitar un servicio
               </button>
               <button
                 type="button"
-                className="block w-full text-center py-4 text-sm font-medium hover:text-secondary"
-                onClick={handleWorkClick}
+                className={`block w-full text-center py-4 text-sm font-medium hover:text-secondary ${location.pathname === '/home-supplier' && 'text-secondary'}`}
+                onClick={() => navigate('/home-supplier')}
               >
-                {careers === 'supplier' ? 'Solicita un servicio' : careers === 'client' && 'Trabaja con nosotros'}
+                Quiero ofrecer un servicio
               </button>
               <button
                 type="button"

@@ -2,6 +2,7 @@ import Avatar from "../Avatar/Avatar";
 
 export type ProfessionalCardProps = {
   nombre: string;
+  apellido: string;
   horario: string;
   hora: string;
   key?: number;
@@ -10,6 +11,7 @@ export type ProfessionalCardProps = {
 
 const ProfessionalCard = ({
   nombre,
+  apellido,
   horario,
   hora,
   key,
@@ -27,7 +29,7 @@ const ProfessionalCard = ({
         textSize="text-lg md:text-h1"
       />
       <div className="flex-1 ml-4">
-        <h2 className="text-xl font-bold mb-1">{nombre}</h2>
+        <h2 className="text-xl font-bold mb-1">{nombre} {apellido}</h2>
         <span className="text-regular-grey mb-2">DISPONIBILIDAD:</span>
         <p className="text-primary mb-1">Horario: {horario}</p>
         <p className="text-primary mb-1">Hora: {hora}</p>

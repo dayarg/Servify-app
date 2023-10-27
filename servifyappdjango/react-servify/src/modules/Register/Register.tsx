@@ -1,10 +1,13 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
 import Electricista from "../../assets/img/electricista-banner.jpg";
 import DateInput from "../../components/DateInput/DateInput";
 import BasicDrawer from "../../components/Drawer/BasicDrawer";
-import { useState } from "react";
+import { homeServices } from "../../components/Drawer/models";
+import DropdownMenu from "../../components/DropdownMenu/DropdownM";
+
 
 interface FormData {
   Nombre: string;
@@ -33,7 +36,7 @@ const Register = () => {
   });
 
   const handleClick = () => {
-    fetch("http://127.0.0.1:8000/core/proveedores/resgister/", {
+    fetch("http://127.0.0.1:8000/core/proveedores/register/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,12 +46,10 @@ const Register = () => {
       .then((response) => response.json())
       .then((data) => {
         const userName = data.username;
-        console.log(data);
         const userId = data["user.id"];
         if (userId) {
           navigate(`/register-2/${userId}`, { state: { userName } });
         } else {
-          // Manejar el caso en el que no se reciba el ID correctamente
           console.error("No se pudo obtener el ID del usuario");
         }
       })
@@ -61,6 +62,21 @@ const Register = () => {
       [name]: value,
     }));
   };
+
+  const profesiones = [
+    { label: "Veterinario", link: "/Veterinario" },
+    { label: "Albañil",  link: "/Albañil" },
+    { label: "Plomero",  link: "/plomero" },
+    { label: "Electricista",  link: "/Electricista" },
+    { label: "Mecanico",  link: "Mecanico" },
+    { label: "Profesor", link: "/Profeso" },
+    { label: "Carpintero",  link: "/Carpintero" },
+    { label: "Jardinero",  link: "/Jardinero" },
+    { label: "Cerrajero",  link: "/Cerrajero" },
+    { label: "Aseador",  link: "/Aseador" },
+    { label: "Maquillista",  link: "/Maquillista" },
+    { label: "Mudanzas",  link: "/Mudanzas" },
+  ];
 
   return (
     <div className="flex flex-col">
@@ -84,8 +100,8 @@ const Register = () => {
               <Input
                 label={"Apellido"}
                 type={"text"}
-                placeholder={"Ingresa tu apellido"}
                 value={formData.Apellido}
+                placeholder={"Ingresa tu apellido"}
                 onChange={(value) => handleChange("Apellido", value)}
               />
             </div>
@@ -93,8 +109,8 @@ const Register = () => {
               <Input
                 label={"Correo electrónico"}
                 type={"email"}
-                placeholder={"Ingresa tu correo electrónico"}
                 value={formData.Correo_electronico}
+                placeholder={"Ingresa tu correo electrónico"}
                 onChange={(value) => handleChange("Correo_electronico", value)}
               />
             </div>
@@ -102,8 +118,8 @@ const Register = () => {
               <Input
                 label={"Identificacion"}
                 type={"text"}
-                placeholder={"Ingresa tu identificación"}
                 value={formData.identificacion}
+                placeholder={"Ingresa tu identificación"}
                 onChange={(value) => handleChange("identificacion", value)}
               />
             </div>
@@ -111,8 +127,8 @@ const Register = () => {
               <Input
                 label={"Teléfono"}
                 type={"phone"}
-                placeholder={"Ingresa tu teléfono"}
                 value={formData.telefono}
+                placeholder={"Ingresa tu teléfono"}
                 onChange={(value) => handleChange("telefono", value)}
               />
             </div>
@@ -120,8 +136,8 @@ const Register = () => {
               <Input
                 label={"Ciudad de residencia"}
                 type={"text"}
-                placeholder={"Ingresa tu ciudad de residencia"}
                 value={formData.Ciudad_de_residencia}
+                placeholder={"Ingresa tu ciudad de residencia"}
                 onChange={(value) => handleChange("Ciudad_de_residencia", value)}
               />
             </div>
@@ -134,20 +150,21 @@ const Register = () => {
               />
             </div>
             <div className="mb-6">
-              <Input
-                label={"Profesión"}
-                type={"text"}
-                placeholder={"Ingresa tu profesión"}
-                value={formData.Profesion}
-                onChange={(value) => handleChange("Profesion", value)}
-              />
+              <label className="text-primary mb-1 font-bold" htmlFor="Profesion">
+                Profesión
+              </label>
+              <DropdownMenu
+            id="dropdownMenu"
+            label="Ingresa tu profesión" 
+            options={homeServices}
+          />
             </div>
             <div className="mb-6">
               <Input
                 label={"Contraseña"}
                 type={"password"}
-                placeholder={"Ingresa la contraseña"}
                 value={formData.password}
+                placeholder={"Ingresa la contraseña"}
                 onChange={(value) => handleChange("password", value)}
               />
             </div>
@@ -162,7 +179,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="hidden mt-1 md:w-1/2 md:block" >
+        <div className="hidden mt-1 md:w-1/2 md:block">
           <img
             src={Electricista}
             alt="electricista banner"
