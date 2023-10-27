@@ -11,7 +11,7 @@ export type InputProps = {
 };
 
 const Input = ({ label, type, placeholder,value, onChange }: InputProps): JSX.Element => {
-  const [value2, setValue2] = useState("");
+  const [, setValue2] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 

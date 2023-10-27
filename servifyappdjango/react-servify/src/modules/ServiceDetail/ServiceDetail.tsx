@@ -16,6 +16,7 @@ interface RouteParams {
 const ServiceDetail: React.FC = () => {
   const navigate = useNavigate();
   const [selectedPersonId, setSelectedPersonId] = useState<number | null>(null);
+  const [servicePerson, setServicePerson] = useState<string | null>(null);
   const { servicePath } = useParams<RouteParams>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [fetchedData, setFetchedData] = useState<
@@ -42,8 +43,11 @@ const ServiceDetail: React.FC = () => {
   }
   const { label, imageBanner } = selectedService;
 
-  const handleOpenModal = (personId: number) => {
+  const handleOpenModal = (personId: number, serviceName: string) => {
     setSelectedPersonId(personId);
+    setServicePerson(serviceName);
+    console.log({serviceName, personId});
+    
     setModalIsOpen(true);
   };
 
@@ -96,7 +100,7 @@ const ServiceDetail: React.FC = () => {
           </div>
           {profesiones.length > 0 ? (
             <div className="w-full md:w-1/2">
-              <h3 className="font-bold text-lg ml-10 mb-2">
+              <h3 className="font-bold text-lg ml-10 mb-2 text-primary-blue">
                 Estos son los profesionales disponibles
               </h3>
               <div className="w-full h-screen px-8 py-3 mx-auto max-w-xl max-h-screen md:bg-scroll md:overflow-auto">
@@ -115,7 +119,7 @@ const ServiceDetail: React.FC = () => {
                             apellido={detail.apellido_pro}
                             horario={"Lunes a Viernes"}
                             hora={"8:00 AM - 3:00 PM"}
-                            onclick={() => handleOpenModal(detail.id)}
+                            onclick={() => handleOpenModal(detail.id, detail.profesion)}
                           />
                         </div>
                       );
