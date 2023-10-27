@@ -4,6 +4,7 @@ from .views import loginuser
 from .views import proveedorView
 from .views import loginproveedor
 from .views import DocumentosView
+from .views import ServiciosView
 
 urlpatterns = [
     path("resgister/", userview.as_view(), name="resgiteruser"),
@@ -15,6 +16,7 @@ urlpatterns = [
     path("documentosget/", DocumentosView.as_view(), name="get_documentos"),
     path("user/<int:id>", userview.as_view(), name="get_user"),
     path("provedor/<int:id>", proveedorView.as_view(), name="get_provedor"),
+    path("servicios/<int:id>", ServiciosView.as_view(), name="servicios"),
 ]
 
 

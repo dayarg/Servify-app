@@ -108,8 +108,10 @@ class servicios(models.Model):
     id_servicio = models.AutoField(primary_key=True)
     nombre_ser  = models.CharField(max_length=30, verbose_name ='nombre')
     fecha_ser   = models.DateField(verbose_name='fecha servicio')
+    hora_ser    = models.CharField(max_length=10, verbose_name ='hora servicio',null=True)
     precio_ser  = models.IntegerField(verbose_name='precio')
     calificacion= models.IntegerField(verbose_name='calificacion')
+    descripcion = models.CharField(max_length=300, verbose_name ='descripcion',null=True)
     proveedor   = models.ForeignKey(proveedores,on_delete=models.CASCADE)
     usuarios    = models.ForeignKey(usuarios,on_delete=models.CASCADE)
 
